@@ -1,6 +1,7 @@
 import json
+from datetime import datetime
 
-file_name = 'data.txt'
+file_name = 'data.json'
 
 def read_file(file_name: str) -> str:
     f = open(file=file_name)
@@ -25,8 +26,11 @@ def sum_of_numbers(numbers: dict) -> int:
 
     return s
 
-data = read_file(file_name)
-numbers = to_dict(data)
-s = sum_of_numbers(numbers)
+def oldest_person(persons: list) -> dict:
+    return min(persons, key=lambda person: datetime.strptime(person['birthday'], "%Y-%m-%d"))
 
-print(s)
+data = read_file(file_name)
+persons = to_dict(data)
+person = oldest_person(persons)
+
+print(person)
